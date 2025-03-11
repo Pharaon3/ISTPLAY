@@ -44,7 +44,9 @@
               </label>
               <span>Beni Hatırla</span>
             </div>
-            <img src="@/assets/login-button.png" type="submit" />
+            <button type="submit" class="login-btn">
+              <img src="@/assets/login-button.png" alt="Giriş Yap" />
+            </button>
           </div>
         </form>
       </div>
@@ -196,7 +198,6 @@ input {
 .toggle-container {
   display: flex;
   align-items: center;
-  margin-top: 10px;
   justify-content: flex-start;
   padding-left: 30px;
 }
@@ -252,5 +253,22 @@ input:checked + .slider:before {
   margin-bottom: 10px;
   background-color: rgba(0, 0, 0, 0.1);
   height: 1px;
+}
+
+.login-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.login-btn img {
+  width: 100px; /* Adjust size */
+  height: auto;
+  transition: transform 0.2s;
+}
+
+.login-btn img:hover {
+  transform: scale(1.05);
 }
 </style>
