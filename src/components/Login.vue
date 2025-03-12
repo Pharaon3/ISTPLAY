@@ -5,6 +5,11 @@
     href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
     rel="stylesheet"
   />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+  />
+
   <div class="login-container">
     <div class="login-box">
       <!-- Header -->
@@ -23,17 +28,28 @@
         <form @submit.prevent="handleLogin">
           <div>
             <label for="email">E-Posta</label>
-            <input type="text" id="email" v-model="email" placeholder="Eldar İbragimov" />
+            <input
+              class="input-form"
+              type="text"
+              id="email"
+              v-model="email"
+              placeholder="Eldar İbragimov"
+            />
           </div>
           <div class="hor-divider"></div>
           <div>
             <label for="password">Şifre</label>
-            <input
-              :type="showPassword ? 'text' : 'password'"
-              id="password"
-              v-model="password"
-              placeholder="******"
-            />
+            <div class="input-form">
+              <input
+                :type="showPassword ? 'text' : 'password'"
+                id="password"
+                v-model="password"
+                placeholder="******"
+              />
+              <span class="button material-symbols-outlined" @click="showPassword = !showPassword">
+                {{ showPassword ? 'visibility_off' : 'visibility' }}
+              </span>
+            </div>
           </div>
           <div class="hor-divider"></div>
           <div>
@@ -159,11 +175,32 @@ body {
   font-weight: bold;
 }
 
-.login-form form > div input {
+.login-form form > div .input-form {
   border-radius: 18px;
   border-width: 0px;
   background-color: #eeedf0;
-  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.input-form input {
+  background-color: transparent;
+  border: none;
+  margin: 0px;
+  padding-left: 0px;
+}
+
+.login-form form input:focus {
+  outline: none;
+}
+
+.input-form .button {
+  cursor: pointer;
+  color: rgb(0, 0, 0, 0.2);
 }
 
 /* Header */
