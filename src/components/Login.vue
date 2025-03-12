@@ -35,6 +35,7 @@
               id="email"
               v-model="email"
               placeholder="Eldar İbragimov"
+              required
             />
           </div>
 
@@ -48,6 +49,7 @@
                 id="password"
                 v-model="password"
                 placeholder="******"
+                required
               />
               <span class="button material-symbols-outlined" @click="togglePassword">
                 {{ showPassword ? 'visibility_off' : 'visibility' }}
@@ -111,15 +113,15 @@ export default {
 
         const data = await response.json()
 
-        console.log('data: ', data)
-
         if (!response.ok) {
           throw new Error(data.message || 'Giriş başarısız!')
         }
 
         alert('Giriş başarılı!')
-        // Optionally, store token in localStorage/sessionStorage
+        // Store token in localStorage/sessionStorage
         localStorage.setItem('authToken', data.token)
+        // Redirect to dashboard or admin page
+        this.$router.push('/dashboard') // Use Vue Router for navigation
       } catch (error) {
         this.errorMessage = error.message
       }
@@ -213,7 +215,7 @@ body {
 
 .login-form form > div .input-form {
   border-radius: 18px;
-  border-width: 0px;
+  border-width: 0;
   background-color: #eeedf0;
   display: flex;
   justify-content: space-between;
@@ -226,8 +228,8 @@ body {
 .input-form input {
   background-color: transparent;
   border: none;
-  margin: 0px;
-  padding-left: 0px;
+  margin: 0;
+  padding-left: 0;
 }
 
 .login-form form input:focus {
@@ -236,7 +238,7 @@ body {
 
 .input-form .button {
   cursor: pointer;
-  color: rgb(0, 0, 0, 0.2);
+  color: rgba(0, 0, 0, 0.2);
 }
 
 /* Header */
