@@ -23,8 +23,9 @@
           <h2>Pappays</h2>
         </div>
       </div>
+
       <div class="login-form">
-        <div v-if="errorMessage" class="error-box">Lütfen bilgilerinizi kontrol ediniz.</div>
+        <div v-if="errorMessage" class="error-box">{{ errorMessage }}</div>
         <form @submit.prevent="handleLogin">
           <div>
             <label for="email">E-Posta</label>
@@ -36,7 +37,9 @@
               placeholder="Eldar İbragimov"
             />
           </div>
+
           <div class="hor-divider"></div>
+
           <div>
             <label for="password">Şifre</label>
             <div class="input-form">
@@ -46,12 +49,14 @@
                 v-model="password"
                 placeholder="******"
               />
-              <span class="button material-symbols-outlined" @click="showPassword = !showPassword">
+              <span class="button material-symbols-outlined" @click="togglePassword">
                 {{ showPassword ? 'visibility_off' : 'visibility' }}
               </span>
             </div>
           </div>
+
           <div class="hor-divider"></div>
+
           <div>
             <div class="toggle-container">
               <label class="switch">
@@ -82,13 +87,44 @@ export default {
     }
   },
   methods: {
-    handleLogin() {
+    async handleLogin() {
       if (!this.email || !this.password) {
         this.errorMessage = 'Lütfen bilgilerinizi kontrol ediniz.'
         return
       }
-      alert('Giriş başarılı!')
+
+      const payload = {
+        namespace: 'admin',
+        credentials: {
+          username: this.email,
+          password: this.password,
+        },
+        persistent: this.rememberMe,
+      }
+
+      try {
+        const response = await fetch('https://hub.istplay.xyz:8443/api/1.0/authentication/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        })
+
+        const data = await response.json()
+
+        console.log('data: ', data)
+
+        if (!response.ok) {
+          throw new Error(data.message || 'Giriş başarısız!')
+        }
+
+        alert('Giriş başarılı!')
+        // Optionally, store token in localStorage/sessionStorage
+        localStorage.setItem('authToken', data.token)
+      } catch (error) {
+        this.errorMessage = error.message
+      }
     },
+
     togglePassword() {
       this.showPassword = !this.showPassword
     },
