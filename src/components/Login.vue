@@ -1,10 +1,4 @@
 <template>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
-    rel="stylesheet"
-  />
   <link
     rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
@@ -123,7 +117,8 @@ export default {
         // Redirect to dashboard or admin page
         this.$router.push('/dashboard') // Use Vue Router for navigation
       } catch (error) {
-        this.errorMessage = error.message
+        this.errorMessage = error.message // Handle error
+        console.log(error)
       }
     },
 
@@ -154,6 +149,7 @@ body {
   align-items: center;
   width: 100%;
   height: 100%;
+  background: url('@/assets/background.png');
 }
 
 /* Login Box */
@@ -166,6 +162,7 @@ body {
   position: relative;
   background-color: rgba(162, 162, 162, 0.25);
   border-radius: 20px;
+  margin: 10px;
 }
 
 .login-container .login-form {
@@ -256,7 +253,7 @@ body {
   color: white;
 }
 
-.logo {
+.login-header .logo {
   width: 50px;
 }
 
@@ -328,6 +325,7 @@ input:checked + .slider:before {
   margin-bottom: 10px;
   background-color: rgba(0, 0, 0, 0.1);
   height: 1px;
+  width: 100%;
 }
 
 .login-btn {
