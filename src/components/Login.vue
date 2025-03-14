@@ -5,6 +5,10 @@
   />
 
   <div class="login-container">
+    <div class="mobile-logo-container">
+      <img src="@/assets/logo.png" alt="Pappays Logo" class="logo" />
+      <h2>Pappays</h2>
+    </div>
     <div class="login-box">
       <!-- Header -->
       <div class="login-header">
@@ -72,6 +76,7 @@
 </template>
 
 <script>
+const API_URL = 'https://hub-works.online:8443'
 export default {
   data() {
     return {
@@ -99,10 +104,11 @@ export default {
       }
 
       try {
-        const response = await fetch('https://hub.istplay.xyz:8443/api/1.0/authentication/login', {
+        const response = await fetch(API_URL + '/api/1.0/authentication/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
+          credentials: 'include',
         })
 
         const data = await response.json()
@@ -150,6 +156,8 @@ body {
   width: 100%;
   height: 100%;
   background: url('@/assets/background.png');
+  flex-direction: column;
+  padding: 20px;
 }
 
 /* Login Box */
@@ -343,5 +351,35 @@ input:checked + .slider:before {
 
 .login-btn img:hover {
   transform: scale(1.05);
+}
+
+.mobile-logo-container {
+  display: none;
+}
+
+@media (max-width: 500px) {
+  .mobile-logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 20px;
+    width: 100%;
+    padding-left: 10%;
+  }
+  .login-header div:nth-child(2) {
+    display: none;
+  }
+  .login-form > form div:nth-child(5) {
+    flex-direction: column;
+  }
+  .login-form > form div:nth-child(5) > div {
+    width: 100%;
+  }
+  .login-form > form div:nth-child(5) > button {
+    display: flex;
+    justify-content: end;
+    width: 100%;
+    margin: 10px;
+  }
 }
 </style>
