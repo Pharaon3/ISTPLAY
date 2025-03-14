@@ -64,7 +64,7 @@
                 <input type="checkbox" v-model="rememberMe" />
                 <span class="slider"></span>
               </label>
-              <span style="margin: 0; white-space: nowrap">Beni HatÄ±rla</span>
+              <span>Beni HatÄ±rla</span>
             </div>
             <button type="submit" class="login-btn">
               <img src="@/assets/login-button.png" alt="GiriÅŸ Yap" />
@@ -367,9 +367,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   font-family: Manrope;
   margin: 0;
+  padding: 0;
 }
 
 canvas {
@@ -419,7 +419,6 @@ canvas {
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100%;
   flex-direction: column;
   padding: 20px;
 }
@@ -448,7 +447,6 @@ canvas {
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  padding-bottom: 100px;
 }
 
 .login-form .error-box {
@@ -535,6 +533,7 @@ canvas {
   align-items: center;
   gap: 10px;
   color: white;
+  padding-right: 50px;
 }
 
 .login-header .logo {
@@ -633,14 +632,25 @@ input:checked + .slider:before {
   display: none;
 }
 
+.mobile-logo-container > h2 {
+  color: rgba(255, 255, 255, 0.7);
+}
+
 @media (max-width: 500px) {
+  body {
+    flex-direction: column;
+    justify-content: start;
+    padding-top: 60px;
+  }
+  #app {
+    height: auto;
+  }
   .mobile-logo-container {
     display: flex;
     align-items: center;
-    justify-content: left;
+    justify-content: center;
     gap: 20px;
     width: 100%;
-    padding-left: 10%;
   }
   .login-header div:nth-child(2) {
     display: none;
@@ -659,15 +669,14 @@ input:checked + .slider:before {
   }
   .login-container {
     padding: 10px;
-    height: 100%;
-    padding-top: 30px;
+    justify-content: start;
   }
   .login-container .login-form {
     padding: 20px;
-    height: 100%;
+    /* height: 100%; */
   }
   .login-box {
-    height: 100%;
+    /* height: 100%; */
   }
   .login-form form {
     padding: 10px;
@@ -685,6 +694,18 @@ input:checked + .slider:before {
   }
   .login-form form > div > label {
     width: 40%;
+  }
+}
+
+@media (max-height: 450px) {
+  .login-header {
+    padding: 10px;
+  }
+}
+
+@media (max-height: 350px) {
+  .login-container .login-form {
+    padding: 10px;
   }
 }
 </style>
