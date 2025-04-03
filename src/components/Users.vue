@@ -61,7 +61,7 @@
                 <Button icon="pi pi-search" class="p-button-warning search-icon" />
               </div>
               <!-- Rows per page dropdown in header -->
-              <div class="flex flex-wrap gap-2 items-center w-full">
+              <div class="flex flex-wrap gap-2 justify-end items-center w-full sm:w-auto">
                 <span class="text-dark">Sayfada kayıt göster</span>
                 <Dropdown :options="rowsPerPageOptions" v-model="rows" option-label="label" option-value="value"
                   class="p-dropdown" placeholder="Rows per page" style="border-radius: 20px; margin-right: 5px;"/>
