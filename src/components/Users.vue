@@ -5,7 +5,7 @@
     <!-- Users Management Card -->
     <div class="user-header">
       <!-- Header with search and user -->
-      <div class="mb-6 flex items-center justify-between">
+      <div class="mb-6 flex flex-wrap items-center justify-between gap-4">
         <div class="flex items-center gap-4">
           <div class="flex items-center justify-center bg-white text-blue-600 user-icon">
             <img src="@/assets/icons/user-icon.png" width="20" height="20" />
@@ -14,7 +14,7 @@
           <span class="text-lg text-white font-size-24">Kullanıcılar</span>
         </div>
 
-        <div class="flex items-center gap-10px user-box">
+        <div class="flex items-center gap-2 user-box">
           <div class="user-circle">
             <span class="user-letter">M</span>
           </div>
@@ -51,23 +51,23 @@
         <DataTable :value="users" paginator :rows="rows" :rowsPerPageOptions="[10, 20, 50]" stripedRows
           responsiveLayout="scroll">
           <template #header>
-            <div class="flex justify-between items-center datatable-header">
-              <div class="text-gray-600 text-sm p-2">
+            <div class="flex flex-wrap justify-between items-center datatable-header">
+              <div class="text-gray-600 text-sm p-2 w-full sm:w-auto">
                 {{ paginationInfo }}
               </div>
               <!-- Paginator Controls in Header -->
-              <div class="flex gap-2 search-box">
-                <InputText v-model="search" placeholder="Arama" class="p-inputtext-sm" />
+              <div class="flex flex-wrap gap-2 search-box w-full sm:w-auto justify-end">
+                <InputText v-model="search" placeholder="Arama" class="p-inputtext-sm w-full sm:w-auto" />
                 <Button icon="pi pi-search" class="p-button-warning search-icon" />
               </div>
               <!-- Rows per page dropdown in header -->
-              <div class="flex flex-row gap-2 justify-end items-center">
+              <div class="flex flex-wrap gap-2 items-center w-full">
                 <span class="text-dark">Sayfada kayıt göster</span>
                 <Dropdown :options="rowsPerPageOptions" v-model="rows" option-label="label" option-value="value"
-                  class="p-dropdown" placeholder="Rows per page" />
+                  class="p-dropdown" placeholder="Rows per page" style="border-radius: 20px; margin-right: 5px;"/>
               </div>
 
-              <div class="flex gap-2 download-button-container">
+              <div class="flex gap-2 download-button-container ml-2">
                 <div class="icon-button">
                   <Button icon="pi pi-download" class="download-icon" />
                   <span>Exel</span>
@@ -141,6 +141,7 @@
     </div>
   </div>
 </template>
+
 
 <script>
 import { Icon } from "@iconify/vue";
