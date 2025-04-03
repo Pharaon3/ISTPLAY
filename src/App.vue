@@ -1,19 +1,47 @@
 <template>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
-    rel="stylesheet"
-  />
-  <router-view />
+  <div
+    class="flex h-screen w-full h-full bg-gradient-to-b from-[#BFDCFD] to-[#FDFCFF] gap-30px"
+  >
+    <!-- Left Sidebar -->
+    <AppSidebar />
+
+    <main class="flex-1 overflow-auto">
+      <Users />
+    </main>
+  </div>
 </template>
 
 <script>
+import AppSidebar from "./components/AppSidebar.vue";
+import Users from "./components/Users.vue";
+
 export default {
-  name: 'App',
-}
+  components: {
+    AppSidebar,
+    Users,
+  },
+};
 </script>
 
 <style>
-/* Add any global styles if needed */
+#app> div {
+  padding: 30px;
+}
+html, body {
+  overflow: hidden;
+  overscroll-behavior: contain;
+  touch-action: none;
+}
+.gap-30px {
+  gap: 30px;
+}
+main {
+  border-radius: 20px;
+}
+@media (max-width: 768px) {
+  #app> div {
+    padding: 10px;
+    padding-top: 60px;
+  }
+}
 </style>
