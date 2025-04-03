@@ -13,6 +13,7 @@ import Aura from '@primevue/themes/aura';
 
 import 'primeicons/primeicons.css';
 import './assets/main.css';
+import Dropdown from 'primevue/dropdown';
 
 console.log('WebSocketService initialized:', WebSocketService);
 
@@ -30,6 +31,7 @@ app.component("DataTable", DataTable);
 app.component("Column", Column);
 app.component("Button", Button);
 app.component("InputText", InputText);
+app.component('Dropdown', Dropdown);
 app.use(pinia);
 app.use(router)
 
