@@ -1,15 +1,11 @@
-import { fileURLToPath, URL } from 'node:url';
-import { defineStore } from 'pinia';
-import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
-import tailwindcss from '@tailwindcss/vite'
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
 import fs from 'fs';
+import { fileURLToPath, URL } from 'node:url';
 
+// https://vite.dev/config/
 export default defineConfig({
-  plugins: [
-    vue(),
-    tailwindcss()
-  ],
+  plugins: [vue()],
   // server: {
   //   host: '0.0.0.0',
   //   port: 2053,
@@ -23,6 +19,7 @@ export default defineConfig({
   //     host: 'hub-works.online',
   //     port: 2053,
   //     protocol: 'wss',
+  //     overlay: false,
   //   },
   // },
   resolve: {

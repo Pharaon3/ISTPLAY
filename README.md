@@ -1,5 +1,22 @@
-# Vue 3 + Vite
+# Pappays Dashboard
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## Как запустить проект локально
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+1. Установите [Node.js](https://nodejs.org/) (LTS версию)
+
+2. Откройте терминал в папке проекта и выполните команды:
+
+```bash
+# Установка зависимостей
+npm install
+
+# Запуск проекта
+npm run preview
+```
+
+3. Откройте браузер и перейдите по адресу: http://localhost:4173
+
+## Системные требования
+
+- Node.js 16.0 или выше
+- Современный браузер (Chrome, Firefox, Safari, Edge)
