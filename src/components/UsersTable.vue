@@ -40,27 +40,57 @@
     <DataTable
       :value="filteredUsers"
       :paginator="true"
-      :rows="5"
+      :rows="10"
       paginatorTemplate="PrevPageLink PageLinks NextPageLink RowsPerPageDropdown"
       responsiveLayout="scroll"
       class="custom-datatable p-datatable-sm"
     >
+      <!-- İsim Column -->
       <Column field="name" header="İsim" sortable>
         <template #sorticon="slotProps">
           <i class="pi pi-sort-alt" :class="{ 'opacity-50': !slotProps.sorted }"></i>
         </template>
       </Column>
+      
+      <!-- E-Posta Adresi Column -->
       <Column field="email" header="E-Posta Adresi" sortable>
         <template #sorticon="slotProps">
           <i class="pi pi-sort-alt" :class="{ 'opacity-50': !slotProps.sorted }"></i>
         </template>
       </Column>
-      <Column field="username" header="Kullanıcı Adı" sortable>
+      
+      <!-- Yetki (Owner) Column -->
+      <Column field="is_owner" header="Yetki" sortable>
         <template #sorticon="slotProps">
           <i class="pi pi-sort-alt" :class="{ 'opacity-50': !slotProps.sorted }"></i>
         </template>
+        <template #body="slotProps">
+          {{ slotProps.data.is_owner ? 'Evet' : 'Hayır' }}
+        </template>
       </Column>
-      <Column field="tfa_type" header="2FA Türü" sortable>
+
+      <!-- Son Giriş Column -->
+      <Column field="last_login" header="Son Giriş" sortable>
+        <template #sorticon="slotProps">
+          <i class="pi pi-sort-alt" :class="{ 'opacity-50': !slotProps.sorted }"></i>
+        </template>
+        <template #body="slotProps">
+          {{ slotProps.data.last_login || 'Henüz Giriş Yapılmadı' }}
+        </template>
+      </Column>
+      
+      <!-- Çekim Yetkisi Column -->
+      <Column field="withdraw_permission" header="Çekim Yetkisi" sortable>
+        <template #sorticon="slotProps">
+          <i class="pi pi-sort-alt" :class="{ 'opacity-50': !slotProps.sorted }"></i>
+        </template>
+        <template #body="slotProps">
+          {{ slotProps.data.withdraw_permission ? 'Evet' : 'Hayır' }}
+        </template>
+      </Column>
+      
+      <!-- 2FA Güvenlik Column -->
+      <Column field="tfa_type" header="2FA Güvenlik" sortable>
         <template #sorticon="slotProps">
           <i class="pi pi-sort-alt" :class="{ 'opacity-50': !slotProps.sorted }"></i>
         </template>
@@ -70,27 +100,8 @@
           </span>
         </template>
       </Column>
-      <Column field="is_owner" header="Sahip" sortable>
-        <template #sorticon="slotProps">
-          <i class="pi pi-sort-alt" :class="{ 'opacity-50': !slotProps.sorted }"></i>
-        </template>
-        <template #body="slotProps">
-          {{ slotProps.data.is_owner ? 'Evet' : 'Hayır' }}
-        </template>
-      </Column>
-      <Column field="is_disabled" header="Devre Dışı" sortable>
-        <template #sorticon="slotProps">
-          <i class="pi pi-sort-alt" :class="{ 'opacity-50': !slotProps.sorted }"></i>
-        </template>
-        <template #body="slotProps">
-          {{ slotProps.data.is_disabled ? 'Evet' : 'Hayır' }}
-        </template>
-      </Column>
-      <Column field="websockets" header="WebSocket Bağlantıları" sortable>
-        <template #sorticon="slotProps">
-          <i class="pi pi-sort-alt" :class="{ 'opacity-50': !slotProps.sorted }"></i>
-        </template>
-      </Column>
+      
+      <!-- İşlem Column (Edit/Delete Actions) -->
       <Column header="İşlem" :style="{ width: '100px' }">
         <template #body="slotProps">
           <div class="flex">
@@ -147,12 +158,12 @@ const confirm = useConfirm();
 
 const dialogVisible = ref(false);
 const selectedUser = ref(null);
-const searchQuery = ref('');
-const rows = ref(10);
+const searchQuery = ref(''); // Search query for filtering
+const rows = ref(10); // Rows per page setting
 
-// admin_users nesnesini diziye çevirip filtreleme
+// Admin users filter and search functionality
 const filteredUsers = computed(() => {
-  const adminUsersArray = Object.values(mainStore.admin_users); // Nesneyi diziye çevir
+  const adminUsersArray = Object.values(mainStore.admin_users); // Convert object to array
 
   if (!searchQuery.value) return adminUsersArray;
 
@@ -166,15 +177,18 @@ const filteredUsers = computed(() => {
   );
 });
 
+// Open edit dialog for user
 const openEditDialog = (user) => {
   selectedUser.value = user;
   dialogVisible.value = true;
 };
 
+// Hide edit dialog
 const onDialogHide = () => {
   selectedUser.value = null;
 };
 
+// Confirm and delete user
 const confirmDelete = (user) => {
   confirm.require({
     message: 'Bu kullanıcıyı silmek istediğinizden emin misiniz?',
@@ -186,17 +200,18 @@ const confirmDelete = (user) => {
   });
 };
 
+// Delete user from admin_users object
 const deleteUser = (user) => {
-  // admin_users bir nesne olduğu için ID ile silme yapıyoruz
   if (user.id in mainStore.admin_users) {
     delete mainStore.admin_users[user.id];
   }
 };
 
 const exportExcel = () => {
-  console.log('Экспорт в Excel');
+  console.log('Excel Export');
 };
 </script>
+
 
 <style scoped>
 /* Стили карточки */
